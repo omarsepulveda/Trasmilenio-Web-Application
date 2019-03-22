@@ -65,6 +65,13 @@ For the current development version see the following links:
 |[Ruta Troncales](http://www.sitp.gov.co/Rutas/servicio_troncal/1_portal_eldorado_universidades)| Ejemplo de Rutas troncales |
 |[Ruta Urbanas](http://www.sitp.gov.co/Rutas/urbanas/105_boit_bachu)| Ejemplo de Rutas urbanas |
 |[Ruta Alimentadora](http://www.sitp.gov.co/Rutas/estacion_portal/14_Cortijo)| Ejemplo de rutas alimentadores |
+***
+
+## Esquema
+
+![alt text][logo]
+
+[logo]:https://github.com/omarsepulveda/Trasmilenio-Integracion-de-Aplicaciones-con-Frameworks-de-Persistencia/blob/master/TRANSMILENIO.svg "schema transmiletio"
 
 ***
 ## :eyeglasses: Autores
