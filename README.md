@@ -60,6 +60,7 @@ For the current development version see the following links:
 |-----|:-----------:|
 |[TransMilenio](https://www.sitp.gov.co/Publicaciones/TransMilenio)|Descripción general del sistema de TransMilenio|
 |[Plano de estaciones y portales de TransMilenio](https://www.sitp.gov.co/plano_de_estaciones_y_portales_de_transmilenio)| Es el mapa de las estaciones y portales|
+|[Troncales](https://www.sitp.gov.co/loader.php?lServicio=Rutas&lTipo=busqueda&lFuncion=troncales)| Lista de troncales de TransMilenio|
 |[Ruta Especiales](http://www.sitp.gov.co/Rutas/especiales/618_Pasquilla)| Ejemplo de Rutas especiales |
 |[Ruta Complementarias](http://www.sitp.gov.co/Rutas/complementarias/132_retrepo_providencia_alta)| Ejemplo de Rutas complementarias |
 |[Ruta Troncales](http://www.sitp.gov.co/Rutas/servicio_troncal/1_portal_eldorado_universidades)| Ejemplo de Rutas troncales |
