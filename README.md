@@ -1,8 +1,8 @@
 # TransMilenio Integracion de Aplicaciones con Frameworks de Persistencia.
 
 ## REQUERIMIENTOS
-  * Angular 7.2.12
   * MySQL 8.0.15
+  * Angular 7.2.12  
   * Grails 3.3.9
   
 ***
