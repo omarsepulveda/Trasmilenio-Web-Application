@@ -1,14 +1,16 @@
 package transmilenio.persistencia
 
-import grails.core.GrailsApplication
-import grails.plugins.*
+import clases.Troncal
 
-class ApplicationController implements PluginManagerAware {
-
-    GrailsApplication grailsApplication
-    GrailsPluginManager pluginManager
+class ApplicationController {
 
     def index() {
-        [grailsApplication: grailsApplication, pluginManager: pluginManager]
+        Troncal troncal = new Troncal(
+            id_troncal: 1,
+            letra_troncal: "A",
+            nombre_troncal: "Caracas",
+            color_troncal: "Azul"
+        )
+        [troncal: troncal]
     }
 }
