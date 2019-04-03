@@ -1,0 +1,8 @@
+import com.transmilenio.Portal
+
+model {
+	Iterable<Portal> portalList
+}
+
+json tmpl.portal(portalList ?: [])
+

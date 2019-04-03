@@ -1,54 +1,54 @@
-package clases
+package com.transmilenio
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-class TroncalController {
+class PortalController {
 
-    TroncalService troncalService
+    PortalService portalService
 
     static responseFormats = ['json', 'xml']
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [get: "GET", save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond troncalService.list(params), model:[troncalCount: troncalService.count()]
+        respond portalService.list(params), model:[portalCount: portalService.count()]
     }
 
     def show(Long id) {
-        respond troncalService.get(id)
+        respond portalService.get(id)
     }
 
-    def save(Troncal troncal) {
-        if (troncal == null) {
+    def save(Portal portal) {
+        if (portal == null) {
             render status: NOT_FOUND
             return
         }
 
         try {
-            troncalService.save(troncal)
+            portalService.save(portal)
         } catch (ValidationException e) {
-            respond troncal.errors, view:'create'
+            respond portal.errors, view:'create'
             return
         }
 
-        respond troncal, [status: CREATED, view:"show"]
+        respond portal, [status: CREATED, view:"show"]
     }
 
-    def update(Troncal troncal) {
-        if (troncal == null) {
+    def update(Portal portal) {
+        if (portal == null) {
             render status: NOT_FOUND
             return
         }
 
         try {
-            troncalService.save(troncal)
+            portalService.save(portal)
         } catch (ValidationException e) {
-            respond troncal.errors, view:'edit'
+            respond portal.errors, view:'edit'
             return
         }
 
-        respond troncal, [status: OK, view:"show"]
+        respond portal, [status: OK, view:"show"]
     }
 
     def delete(Long id) {
@@ -57,7 +57,7 @@ class TroncalController {
             return
         }
 
-        troncalService.delete(id)
+        portalService.delete(id)
 
         render status: NO_CONTENT
     }

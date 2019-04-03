@@ -1,0 +1,7 @@
+import com.transmilenio.Portal
+
+model {
+	Portal portal
+}
+
+json tmpl.portal(portal)
