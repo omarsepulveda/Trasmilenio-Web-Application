@@ -1,4 +1,4 @@
-# INSTALATION MySQL Debian 9
+# INSTALACIÓN MySQL Debian 9
 
 **NOTA**: ejecutar comandos como usuario **no root**
 
