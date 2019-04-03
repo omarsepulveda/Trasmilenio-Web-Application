@@ -1,0 +1,8 @@
+import clases.Troncal
+
+model {
+	Iterable<Troncal> troncalList
+}
+
+json tmpl.troncal(troncalList ?: [])
+

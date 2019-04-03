@@ -1,0 +1,7 @@
+import clases.Troncal
+
+model {
+	Troncal troncal
+}
+
+json tmpl.troncal(troncal)

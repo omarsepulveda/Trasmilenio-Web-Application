@@ -106,3 +106,22 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+    # dataSource:
+    #     pooled: true
+    #     jmxExport: true
+    #     driverClassName: com.mysql.jdbc.Driver
+    #     dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    #     username: root
+    #     password:
+---
+grails:
+    mysql:
+        url: bolt://localhost/ejemplo_mvc
+        username: "root"
+        password: ""
+
+    #  environments:
+    #      development:
+    #          dataSource:
+    #              dbCreate: update
+    #              url: jdbc:mysql://localhost/ejemplo_mvc

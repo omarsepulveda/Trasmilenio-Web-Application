@@ -1,6 +1,14 @@
 package clases
 
+
+import grails.rest.*
+
+import grails.compiler.GrailsCompileStatic
+
+@GrailsCompileStatic
 class Troncal {
+
+    static mapWith = "mysql"
 
     int id_troncal
     String letra_troncal
@@ -9,4 +17,8 @@ class Troncal {
 
     static constraints = {
     }
+
+    public String toString(){
+       nombre_troncal
+    } 
 }
