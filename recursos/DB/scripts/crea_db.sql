@@ -2,7 +2,7 @@ CREATE OR REPLACE DATABASE db_transmilenio
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
-USE transmilenio;
+USE db_transmilenio;
 
 CREATE TABLE `troncales` (
   `id_troncal` int(11) AUTO_INCREMENT,
