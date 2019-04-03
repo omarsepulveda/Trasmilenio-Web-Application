@@ -1,27 +1,48 @@
 # TransmilenioApp
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
+# Requisitos
+node js con su gestor de paquetes npm.
 
-## Development server
+type-script
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Pasos antes de la instalación
+Instalar la última versión de angular
 
-## Code scaffolding
+`npm install @angular/cli –g`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Si se quiere utilizar la misma de este proyecto
 
-## Build
+`npm install @angular/cli@7.3.6`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Si se quiere verificar la versión de angular
 
-## Running unit tests
+`ng new nombre_de_mi_app`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Para crear el proyecto en angular
 
-## Running end-to-end tests
+`ng new nombre_de_mi_app`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Servidor de desarrollo
 
-## Further help
+Correr `ng serve` para montar un servidor de desarrollo. Navegar a `http://localhost:4200/`. La aplicación se volverá a cargar automáticamente si cambia alguno de los archivos de origen.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Estructura de código
+
+Correr `ng generate component component-name` para generar un nuevo componente. También puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Construir
+
+Correr `ng build` para construir el proyecto. Los artefactos de compilación serán almacenados en el directorio `dist/`. Utilizar `--prod` bandera para una construcción en producción.
+
+## Correr Pruebas unitarias
+
+Correr `ng test` para ejecutar las pruebas unitarias via [Karma](https://karma-runner.github.io).
+
+## Correr pruebas de extremo a extremo
+
+Correr `ng e2e` para ejecutar las pruebas de extremo a extremo via [Protractor](http://www.protractortest.org/).
+
+## Ayuda adicional
+
+Para obtener más ayuda sobre el uso del CLI de angular `ng help` o ve a ver [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
