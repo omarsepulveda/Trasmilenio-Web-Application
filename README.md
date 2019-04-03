@@ -2,7 +2,7 @@
 
 ## REQUERIMIENTOS
   * MySQL 8.0.15
-  * Angular 7.2.12  
+  * Angular 7.3.6  
   * Grails 3.3.9
   
 ***
