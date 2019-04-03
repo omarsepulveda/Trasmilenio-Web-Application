@@ -86,3 +86,7 @@ Creamos el usuario transmilenio
 `CREATE USER 'transmilenio'@'localhost' IDENTIFIED BY 'transmilenio';`
 
 `GRANT SELECT, INSERT, UPDATE, DELETE ON db_transmilenio.* TO 'transmilenio'@'localhost';`
+
+Conectarse a la base de datos con el usuario transmilenio
+
+`sudo mysql -h localhost -u transmilenio -p --database=db_transmilenio`
