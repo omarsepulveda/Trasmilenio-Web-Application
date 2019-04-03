@@ -1,0 +1,1 @@
+ALTER TABLE tipos_paradas ADD CONSTRAINT tpa_fk_idp FOREIGN KEY (id_padre_tipo_parada) REFERENCES tipos_paradas (id_tipo_parada) ON DELETE CASCADE ON UPDATE CASCADE;

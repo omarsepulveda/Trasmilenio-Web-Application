@@ -1,0 +1,2 @@
+ALTER TABLE vehiculos_rutas ADD CONSTRAINT ver_fk_idv FOREIGN KEY (id_vehiculo) REFERENCES vehiculos (id_vehiculo) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE vehiculos_rutas ADD CONSTRAINT ver_fk_idr FOREIGN KEY (id_ruta) REFERENCES rutas (id_ruta) ON DELETE CASCADE ON UPDATE CASCADE;

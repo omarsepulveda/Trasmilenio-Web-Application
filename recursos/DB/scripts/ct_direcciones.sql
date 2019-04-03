@@ -1,0 +1,1 @@
+ALTER TABLE direcciones ADD CONSTRAINT dir_fk_idp FOREIGN KEY (id_padre_direccion) REFERENCES direcciones (id_direccion) ON DELETE CASCADE ON UPDATE CASCADE;
