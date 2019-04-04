@@ -1,4 +1,4 @@
-# TransmilenioApp
+# TransMilenioApp
 Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
 
 # Requisitos
@@ -46,3 +46,28 @@ Correr `ng e2e` para ejecutar las pruebas de extremo a extremo via [Protractor](
 ## Ayuda adicional
 
 Para obtener más ayuda sobre el uso del CLI de angular `ng help` o ve a ver [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Crear el primer servicio en angular
+
+Correr `ng generate service [nombre servicio]`
+Con esto generamos un archivo con la estructura de servicio en angular, esta clase se utiliza para realizar operaciones POST, GET, PUT, DELETE, etc.
+
+Importamos HttpClientModule en app.module.ts
+```TypeScript
+imports: [HttpClientModule]
+```
+
+Configuramos las variables iniciales del servicio
+
+```TypeScript
+  url: string;
+  httpHeaders: HttpHeaders;
+  
+  constructor(private http: HttpClient) {
+    this.url = '';
+    this.httpHeaders = new HttpHeaders({
+          'Content-Type': 'application/json',
+        }
+    );
+  }
+```
