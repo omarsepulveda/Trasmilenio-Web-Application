@@ -1,5 +1,4 @@
 import {Component ,OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -7,9 +6,11 @@ import {Router} from '@angular/router';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+    conClase: string;
 
 
-    constructor(public router: Router) {
+    constructor() {
+        this.conClase = 'home';
     }
 
     ngOnInit(): void {

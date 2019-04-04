@@ -8,6 +8,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { VehiculosComponent } from './components/vehiculos/vehiculos.component';
 import { TroncalesComponent } from './components/troncales/troncales.component';
 import { PortalesComponent } from './components/portales/portales.component';
+import {HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
     {path: '', component: IndexComponent},
@@ -26,11 +27,13 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         RouterModule.forRoot(appRoutes, {initialNavigation: 'enabled'}),
-        MDBBootstrapModule.forRoot()
+        MDBBootstrapModule.forRoot(),
+        HttpClientModule
     ],
     providers: [],
     exports: [RouterModule],
     bootstrap: [AppComponent]
 })
 export class AppModule {
+
 }
