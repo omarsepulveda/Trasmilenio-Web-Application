@@ -24,7 +24,7 @@ class PortalController {
             render status: NOT_FOUND
             return
         }
-
+        
         try {
             portalService.save(portal)
         } catch (ValidationException e) {

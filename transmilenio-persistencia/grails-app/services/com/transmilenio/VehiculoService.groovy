@@ -1,4 +1,4 @@
-package clases
+package com.transmilenio
 
 import grails.gorm.services.Service
 import groovy.transform.CompileDynamic
@@ -6,19 +6,17 @@ import groovy.transform.CompileStatic
 
 @SuppressWarnings(['UnusedVariable', 'SpaceAfterOpeningBrace', 'SpaceBeforeClosingBrace'])
 @CompileStatic
-@Service(Troncal)
-interface TroncalService {
+@Service(Vehiculo)
+interface VehiculoService {
 
-    abstract Troncal find(String nombre_troncal)
+    Vehiculo get(Serializable id)
 
-    Troncal get(Serializable id)
-
-    List<Troncal> list(Map args)
+    List<Vehiculo> list(Map args)
 
     Long count()
 
     void delete(Serializable id)
 
-    Troncal save(Troncal troncal)
+    Vehiculo save(Vehiculo vehiculo)
 
 }

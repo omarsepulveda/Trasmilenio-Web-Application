@@ -1,4 +1,4 @@
-import clases.Troncal
+import com.transmilenio.Troncal
 
 model {
 	Troncal troncal

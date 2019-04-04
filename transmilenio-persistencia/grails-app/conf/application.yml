@@ -81,7 +81,7 @@ environments:
         dataSource:
             # dbCreate: create-drop #Para desarrollo crear y eliminar la BD siempre
             # url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
-            dbCreate: create-drop #solo agrega
+            dbCreate: create-drop  #solo agrega
             url: jdbc:mysql://localhost:3306/transmilenio
     test:
         dataSource:

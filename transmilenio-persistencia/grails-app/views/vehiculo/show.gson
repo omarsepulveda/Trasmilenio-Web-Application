@@ -1,0 +1,7 @@
+import com.transmilenio.Vehiculo
+
+model {
+	Vehiculo vehiculo
+}
+
+json tmpl.vehiculo(vehiculo)

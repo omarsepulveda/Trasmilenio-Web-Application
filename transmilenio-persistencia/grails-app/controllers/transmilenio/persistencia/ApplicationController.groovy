@@ -1,6 +1,6 @@
 package transmilenio.persistencia
 
-import clases.Troncal
+import com.transmilenio.Troncal
 
 class ApplicationController {
 

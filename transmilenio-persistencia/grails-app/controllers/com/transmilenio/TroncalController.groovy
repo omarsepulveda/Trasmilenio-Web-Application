@@ -1,4 +1,4 @@
-package clases
+package com.transmilenio
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
@@ -13,14 +13,20 @@ class TroncalController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond troncalService.list(params), model:[troncalCount: troncalService.count()]
-        
+        def book = new Troncal(id_troncal: 2, letra_troncal:"F", nombre_troncal:"Americas", color_troncal: "Rojo")  
+        println (book.color_troncal)
+        if (!book.save()) {
+            b.errors.each {
+                println ("Holas")
+            }
+        }
+        def p = Troncal.get(7)
+        assert 7 == p.id
     }
 
     def show(Long id) {
         respond troncalService.get(id)
     }
-
-    
 
     def save(Troncal troncal) {
         if (troncal == null) {
