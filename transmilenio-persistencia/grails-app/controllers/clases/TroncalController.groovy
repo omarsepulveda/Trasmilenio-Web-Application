@@ -13,11 +13,14 @@ class TroncalController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond troncalService.list(params), model:[troncalCount: troncalService.count()]
+        
     }
 
     def show(Long id) {
         respond troncalService.get(id)
     }
+
+    
 
     def save(Troncal troncal) {
         if (troncal == null) {

@@ -1,1 +1,0 @@
-ALTER TABLE vehiculos ADD CONSTRAINT veh_fk_idt FOREIGN KEY (id_tipo_vehiculo) REFERENCES tipos_vehiculos (id_tipo_vehiculo) ON DELETE CASCADE ON UPDATE CASCADE;

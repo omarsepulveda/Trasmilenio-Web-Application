@@ -1,1 +1,0 @@
-ALTER TABLE paraderos ADD CONSTRAINT par_fk_idd FOREIGN KEY (id_direccion) REFERENCES direcciones (id_direccion) ON DELETE CASCADE ON UPDATE CASCADE;

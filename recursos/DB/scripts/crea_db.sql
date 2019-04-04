@@ -26,7 +26,7 @@ CREATE TABLE estaciones (
   imagen_estacion varchar(70) COLLATE utf8mb4_unicode_ci,
   id_troncal int(11) NOT NULL,
   PRIMARY KEY (id_estacion)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE tipos_paradas (
   id_tipo_parada int(11) AUTO_INCREMENT,
