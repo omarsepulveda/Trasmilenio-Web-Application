@@ -11,10 +11,12 @@
             transporte masivo urbano de pasajeros, y tiene la responsabilidad de la prestación eficiente
             y permanente del servicio.
         </h6>
-        <a mdbBtn href="https://www.transmilenio.gov.co/publicaciones/146028/historia-de-transmilenio/" target="_blank" color="white" outline="true" mdbWavesEffect>
+        <a mdbBtn href="https://www.transmilenio.gov.co/publicaciones/146028/historia-de-transmilenio/" target="_blank"
+           color="white" outline="true" mdbWavesEffect>
             Leer mas
         </a>
-        <a title="GitHub" class="text-white" href="https://github.com/omarsepulveda/Trasmilenio-Web-Application" target="_blank">
+        <a title="GitHub" class="text-white" href="https://github.com/omarsepulveda/Trasmilenio-Web-Application"
+           target="_blank">
             <i class="align-middle fab fa-github mx-2 fa-3x"></i>
         </a>
     </div>
@@ -22,7 +24,7 @@
     <!--Grid column-->
     <div class="col-md-6 col-xl-5 mb-4">
         <!--Form-->
-        <mdb-card class="wow fadeInRight" data-wow-delay="0.3s">
+        <mdb-card *ngIf="getLocalStorage('correo') === null" class="wow fadeInRight" data-wow-delay="0.3s">
             <mdb-card-body class="z-depth-2">
                 <!--Header-->
                 <div class="text-center">
@@ -32,25 +34,68 @@
                     <hr>
                 </div>
                 <!--Body-->
-                <div class="md-form">
-                    <i class="fas fa-envelope prefix grey-text"></i>
-                    <input type="text" id="email" class="form-control" mdbInput>
-                    <label for="email">correo</label>
-                </div>
+                <form name="form" ngForm (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+                    <div class="md-form">
+                        <i class="fas fa-envelope prefix grey-text"></i>
+                        <input type="email" id="correo" class="form-control"
+                               name="correo" [(ngModel)]="usuario.correo"
+                               [ngClass]="{ 'is-invalid': f.submitted && correo.invalid }"
+                               #correo="ngModel" required
+                               mdbInput>
+                        <label for="correo">correo</label>
+                        <div *ngIf="f.submitted && correo.invalid" class="invalid-feedback">
+                            <div *ngIf="correo.errors.required">El correo es requerido</div>
+                        </div>
+                    </div>
 
-                <div class="md-form">
-                    <i class="fas fa-key prefix grey-text"></i>
-                    <input type="password" id="password" class="form-control" mdbInput>
-                    <label for="password">contraseña</label>
-                </div>
+                    <div class="md-form">
+                        <i class="fas fa-key prefix grey-text"></i>
+                        <input type="password" id="contrasena" class="form-control"
+                               name="contrasena" [(ngModel)]="usuario.contrasena"
+                               [ngClass]="{ 'is-invalid': f.submitted && contrasena.invalid }"
+                               #contrasena="ngModel" required
+                               mdbInput>
+                        <label for="contrasena">contraseña</label>
+                        <div *ngIf="f.submitted && contrasena.invalid" class="invalid-feedback">
+                            <div *ngIf="contrasena.errors.required">Contraseña requerida</div>
+                        </div>
+                    </div>
 
-                <!--Textarea with icon prefix-->
-                <div class="text-center mt-3">
-                    <button mdbBtn color="indigo" mdbWavesEffect>Enviar</button>
-                </div>
+                    <div class="text-center mt-3">
+                        <button mdbBtn color="indigo" mdbWavesEffect>Enviar</button>
+                    </div>
+                </form>
             </mdb-card-body>
         </mdb-card>
         <!--/.Form-->
+
+        <!-- ITEMS -->
+        <mdb-card *ngIf="getLocalStorage('correo') !== null" class="wow fadeInRight" data-wow-delay="0.3s">
+            <mdb-card-body class="z-depth-2">
+                <!--Header-->
+                <div class="text-center">
+                    <h3 class="dark-grey-text">
+                        <strong>Reportes</strong>
+                    </h3>
+                    <hr>
+                </div>
+                <!--Body-->
+                <div class="text-center mt-3">
+                    <button mdbBtn style="width: 100%" type="button" size="lg" outline="true" color="danger" mdbWavesEffect>
+                        Vehículos <mdb-icon fas icon="bus-alt fa-1.9x" class="mr-1"></mdb-icon>
+                    </button>
+
+                    <button mdbBtn style="width: 100%" type="button" size="lg" outline="true" color="warning" mdbWavesEffect>
+                        Troncales <mdb-icon fas icon="road fa-1.9x" class="mr-1"></mdb-icon>
+                    </button>
+
+                    <button mdbBtn style="width: 100%" type="button" size="lg" outline="true" color="info" mdbWavesEffect>
+                        Rutas <mdb-icon fas icon="route fa-1.9x" class="mr-1"></mdb-icon>
+                    </button>
+                </div>
+            </mdb-card-body>
+        </mdb-card>
+        <!--        ITEMS-->
     </div>
     <!--Grid column-->
 </div>

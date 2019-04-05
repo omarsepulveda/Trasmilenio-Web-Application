@@ -2,24 +2,41 @@
     <!--Navbar-->
     <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
         <mdb-navbar-brand>
-            <a class="logo navbar-brand waves-light" mdbWavesEffect routerLink="/" routerLinkActive="active" (click)="conClase = 'home'">
+            <a class="logo navbar-brand waves-light" mdbWavesEffect routerLink="/" routerLinkActive="active"
+               (click)="conClase = 'home'">
                 <strong>TRANSMILENIO</strong>
             </a>
         </mdb-navbar-brand>
         <links>
             <ul class="navbar-nav mr-auto">
-                <li [ngClass]="{'active': conClase==='v'}" class="nav-item waves-light" mdbWavesEffect (click)="conClase = 'v'">
+                <li [ngClass]="{'active': conClase==='v'}" class="nav-item waves-light" mdbWavesEffect
+                    (click)="conClase = 'v'">
                     <a class="nav-link"
                        routerLink="/vehiculos" routerLinkActive="active">Vehículos<span
-                         class="sr-only">(current)</span></a>
+                            class="sr-only">(current)</span></a>
                 </li>
-                <li [ngClass]="{'active': conClase==='t'}" class="nav-item waves-light" mdbWavesEffect (click)="conClase = 't'">
+                <li [ngClass]="{'active': conClase==='t'}" class="nav-item waves-light" mdbWavesEffect
+                    (click)="conClase = 't'">
                     <a class="nav-link" routerLink="/troncales" routerLinkActive="active">Troncales<span
-                             class="sr-only">(current)</span></a>
+                            class="sr-only">(current)</span></a>
                 </li>
-                <li [ngClass]="{'active': conClase==='p'}" class="nav-item waves-light" mdbWavesEffect (click)="conClase = 'p'">
+                <li [ngClass]="{'active': conClase==='p'}" class="nav-item waves-light" mdbWavesEffect
+                    (click)="conClase = 'p'">
                     <a class="nav-link" routerLink="/portales" routerLinkActive="active">Portales<span
-                             class="sr-only">(current)</span></a>
+                            class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul *ngIf="getLocalStorage('correo') !== null" class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item dropdown" dropdown>
+                    <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                       mdbWavesEffect>
+                        <mdb-icon fas icon="user"></mdb-icon>
+                        {{getLocalStorage('correo')}}<span class="caret"></span>
+                    </a>
+                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary"
+                         role="menu">
+                        <a class="dropdown-item waves-light" (click)="closeSession()" mdbWavesEffect>Cerrar sesión</a>
+                    </div>
                 </li>
             </ul>
         </links>

@@ -13,6 +13,14 @@ export class AppComponent implements OnInit{
         this.conClase = 'home';
     }
 
+    getLocalStorage(key){
+        return localStorage.getItem(key);
+    }
+
+    closeSession(){
+        localStorage.clear();
+    }
+
     ngOnInit(): void {
     }
 }
