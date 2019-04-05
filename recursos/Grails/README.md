@@ -18,33 +18,40 @@ Para instalar Grails sólo se deben ejecutar los siguientes comandos en una term
     sdk install grails
     
  Si desea verificar la versión de Grails digite en la terminal:
-    
+ ``   
     grails -version
+ ``
     
 [Ver más versiones de Grails](https://grails.org/download.html)
 
 # Crear API Con Grails
 
 Sólo ejecute el comando 
-
+`` 
   grails create-app nombre-proyecto --profile=rest-api
-  
+``   
  Grails permite crear diferentes proyectos con [perfiles](http://grails.org/profiles.html) según se requiera.
  
  # Correr API
  
 Para correr la aplicación debe ejecutar el comando
+`` 
   grails run-app
+`` 
 
 Si desea cambiar el puerto que viene por defecto (8080) sólo debe agregar -port= y el puerto que escuchará la aplicación
+`` 
   grails run-app -port=8090
+`` 
 
 Si es la primera vez que corre una aplicación de Grails, debe esperar a que se culmine la descarga que se inicia automáticamente y luego dirigirse a la dirección que se asigna, localhost:8080.
 
 # Crear Dominio
 
 Para generar los dominios en Grails solamente ejecute el comando
+`` 
   grails create-domain-class nombre-dominio
+ `` 
   
 Si desea crear tablas desde Grails sólo cree los atributos y [reglas](https://docs.grails.org/latest/ref/Constraints/Usage.html) que va a tener
 
@@ -89,8 +96,9 @@ class NombreClase {
 # Generar Vistas, Controladores, Servicios y Test
 
 Si no desea generar cada uno de estos sólo ejecute:
-
+`` 
   grails generate-all nombre
+  `` 
 
 Para conocer que más funciones tiene grails ingrese [aquí](https://grails-profiles.github.io/rest-api/latest/guide/index.html)
 
@@ -125,8 +133,9 @@ environments:
 ```
 
 Para construir el proyecto solamente digite:
-
+`` 
   grails war
+  `` 
   
 # Despliegue De Aplicación
 
