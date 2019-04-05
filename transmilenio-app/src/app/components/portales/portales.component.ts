@@ -9,6 +9,10 @@ export class PortalesComponent implements OnInit {
 
   constructor() { }
 
+  getLocalStorage(key){
+    return localStorage.getItem(key);
+  }
+
   ngOnInit() {
   }
 
