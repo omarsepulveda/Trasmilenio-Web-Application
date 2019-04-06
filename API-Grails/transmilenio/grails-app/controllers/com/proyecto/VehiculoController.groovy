@@ -11,7 +11,7 @@ class VehiculoController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 28, 100)
         respond vehiculoService.list(params), model:[vehiculoCount: vehiculoService.count()]
     }
 

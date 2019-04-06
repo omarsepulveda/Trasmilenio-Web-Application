@@ -1,0 +1,8 @@
+import com.proyecto.Generar
+
+model {
+	Iterable<Generar> generarList
+}
+
+json tmpl.generar(generarList ?: [])
+

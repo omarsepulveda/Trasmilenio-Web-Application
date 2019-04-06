@@ -10,9 +10,11 @@ class TipoVehiculoController {
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond tipoVehiculoService.list(params), model:[tipoVehiculoCount: tipoVehiculoService.count()]
+    def index(Integer max, Integer generar) {
+       
+            params.max = Math.min(max ?: 10, 100)
+            respond tipoVehiculoService.list(params), model:[tipoVehiculoCount: tipoVehiculoService.count()]
+        
     }
 
     def show(Long id) {

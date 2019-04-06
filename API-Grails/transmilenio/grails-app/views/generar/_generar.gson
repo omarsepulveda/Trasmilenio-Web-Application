@@ -1,0 +1,7 @@
+import com.proyecto.Generar
+
+model {
+	Generar generar
+}
+
+json g.render(generar, [resolveTemplate: false])
