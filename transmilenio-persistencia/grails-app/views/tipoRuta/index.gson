@@ -1,0 +1,8 @@
+import com.transmilenio.TipoRuta
+
+model {
+	Iterable<TipoRuta> tipoRutaList
+}
+
+json tmpl.tipoRuta(tipoRutaList ?: [])
+

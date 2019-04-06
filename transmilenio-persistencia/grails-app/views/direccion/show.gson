@@ -1,0 +1,7 @@
+import com.transmilenio.Direccion
+
+model {
+	Direccion direccion
+}
+
+json tmpl.direccion(direccion)

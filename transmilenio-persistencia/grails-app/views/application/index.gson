@@ -1,10 +1,12 @@
 model{
     Troncal troncal
+    Portal portal
 }
 
 json {
     troncal {
         Numero troncal.id_troncal
         Nombre troncal.nombre_troncal
+        Portal portal.nombre_portal
     }    
 }

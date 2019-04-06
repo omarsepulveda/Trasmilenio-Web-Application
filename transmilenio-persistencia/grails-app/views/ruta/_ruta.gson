@@ -1,0 +1,7 @@
+import com.transmilenio.Ruta
+
+model {
+	Ruta ruta
+}
+
+json g.render(ruta, [resolveTemplate: false])

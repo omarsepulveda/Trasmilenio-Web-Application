@@ -1,0 +1,7 @@
+import com.transmilenio.TipoRuta
+
+model {
+	TipoRuta tipoRuta
+}
+
+json tmpl.tipoRuta(tipoRuta)

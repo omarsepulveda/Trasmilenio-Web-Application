@@ -1,0 +1,7 @@
+import com.transmilenio.Nuevo
+
+model {
+	Nuevo nuevo
+}
+
+json tmpl.nuevo(nuevo)

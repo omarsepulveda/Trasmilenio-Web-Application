@@ -1,0 +1,8 @@
+import com.transmilenio.HorarioRuta
+
+model {
+	Iterable<HorarioRuta> horarioRutaList
+}
+
+json tmpl.horarioRuta(horarioRutaList ?: [])
+

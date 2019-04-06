@@ -1,0 +1,7 @@
+import com.transmilenio.TipoVehiculo
+
+model {
+	TipoVehiculo tipoVehiculo
+}
+
+json g.render(tipoVehiculo, [resolveTemplate: false])

@@ -1,0 +1,7 @@
+import com.transmilenio.Paradero
+
+model {
+	Paradero paradero
+}
+
+json tmpl.paradero(paradero)

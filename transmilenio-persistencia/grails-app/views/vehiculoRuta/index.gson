@@ -1,0 +1,8 @@
+import com.transmilenio.VehiculoRuta
+
+model {
+	Iterable<VehiculoRuta> vehiculoRutaList
+}
+
+json tmpl.vehiculoRuta(vehiculoRutaList ?: [])
+

@@ -1,0 +1,8 @@
+import com.transmilenio.TipoVehiculo
+
+model {
+	Iterable<TipoVehiculo> tipoVehiculoList
+}
+
+json tmpl.tipoVehiculo(tipoVehiculoList ?: [])
+

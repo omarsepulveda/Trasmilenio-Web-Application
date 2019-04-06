@@ -1,0 +1,8 @@
+import com.transmilenio.Parada
+
+model {
+	Iterable<Parada> paradaList
+}
+
+json tmpl.parada(paradaList ?: [])
+
