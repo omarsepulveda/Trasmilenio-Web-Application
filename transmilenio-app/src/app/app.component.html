@@ -15,6 +15,12 @@
                        routerLink="/vehiculos" routerLinkActive="active">Vehículos<span
                             class="sr-only">(current)</span></a>
                 </li>
+                <li [ngClass]="{'active': conClase==='tv'}" class="nav-item waves-light" mdbWavesEffect
+                    (click)="conClase = 'tv'">
+                    <a class="nav-link"
+                       routerLink="/tipos-vehiculo" routerLinkActive="active">Tipos Vehículo<span
+                            class="sr-only">(current)</span></a>
+                </li>
                 <li [ngClass]="{'active': conClase==='t'}" class="nav-item waves-light" mdbWavesEffect
                     (click)="conClase = 't'">
                     <a class="nav-link" routerLink="/troncales" routerLinkActive="active">Troncales<span
@@ -44,7 +50,7 @@
     <!-- Navbar -->
     <!-- Full Page Intro -->
     <div class="view"
-         style="background-image: url('assets/img/background.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+         style="background-image: url('/assets/img/background.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
         <div class="mask rgba-indigo-strong d-flex justify-content-center align-items-center">
             <!-- Content -->
             <div class="container">

@@ -1,19 +1,20 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {TipoVehiculo} from '../models/tipo-vehiculo';
 import {AppGlobals} from '../models/appGlobals';
 import {Vehiculo} from '../models/vehiculo';
 
 @Injectable({
     providedIn: 'root'
 })
-export class VehiculosService {
+export class TipoVehiculoService {
 
     url: string;
     httpHeadersGET: HttpHeaders;
     httpHeadersPOST: HttpHeaders;
 
     constructor(private http: HttpClient, private appGlobals: AppGlobals) {
-        this.url = appGlobals.ip + 'Vehiculo';
+        this.url = appGlobals.ip + 'TipoVehiculo';
         this.httpHeadersGET = new HttpHeaders({
                 'Content-Type': 'text/plain',
             }
@@ -26,11 +27,11 @@ export class VehiculosService {
     }
 
     get() {
-        return this.http.get(this.url + '?max=-1');
+        return this.http.get(this.url+'?max=-1');
     }
 
-    post(vehiculo: Vehiculo) {
-        return this.http.post(this.url, JSON.stringify(vehiculo), {headers: this.httpHeadersPOST});
+    post(tipo: TipoVehiculo) {
+        return this.http.post(this.url, JSON.stringify(tipo), {headers: this.httpHeadersPOST});
     }
 
     put(vehiculo: Vehiculo) {
@@ -40,9 +41,4 @@ export class VehiculosService {
     delete(vehiculo: Vehiculo) {
         return this.http.delete(this.url + '/' + vehiculo.id);
     }
-
-    generador(cantidad: number) {
-        return this.http.get(this.appGlobals.ip + 'Generar?max=' + cantidad);
-    }
-
 }

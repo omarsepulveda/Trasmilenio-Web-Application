@@ -1,11 +1,11 @@
-<mdb-card cascade="true" wider="true" reverse="true" class="my-4" style="margin-top: 100px !important;">
+<mdb-card cascade="true" wider="true" reverse="true" class="my-4">
     <!-- Card content -->
     <mdb-card-body cascade="true" class="text-center">
         <!--Title-->
         <mdb-card-title>
             <h3>
                 <strong>Vehículos</strong>
-                <div *ngIf="getLocalStorage('correo')" class="btn-group" mdbDropdown (click)="ferame.show(); limpiar()">
+                <div *ngIf="getLocalStorage('correo')" class="btn-group" mdbDropdown (click)="ferame.show(); clearVehiculo()">
                     <mdb-icon fas icon="plus-circle teal-text mx-4" size="1x"
                               mdbDropdownToggle class="waves-effect" mdbWavesEffect>
                     </mdb-icon>
@@ -14,9 +14,9 @@
         </mdb-card-title>
         <!--Title-->
         <mdb-card-text>
-            <table mdbTable mdbTableScroll bordered="true"
+            <table *ngIf="vehiculos.length > 0" mdbTable mdbTableScroll bordered="true"
                    class="table table-striped table-responsive-md btn-table"
-                   scrollY="true" maxHeight="400">
+                   scrollY="true" maxHeight="450">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -31,8 +31,8 @@
                 <tr mdbTableCol>
                     <th scope="row">{{v.id}}</th>
                     <td>{{v.matricula}}</td>
-                    <td>{{v.codigo}}</td>
-                    <td>{{v.tipo}}</td>
+                    <td>{{v.codigo_interno}}</td>
+                    <td>{{getTipo(v.tipo)}}</td>
                     <td *ngIf="getLocalStorage('correo')">
                         <div class="btn-group" mdbDropdown>
                             <mdb-icon fas icon="cog indigo-text" size="2x" classInside="dropdown-toggle"
@@ -47,6 +47,10 @@
                 </tr>
                 </tbody>
             </table>
+
+            <label *ngIf="vehiculos.length < 1">
+                <p class="text-center">No se encontraron registros.</p>
+            </label>
         </mdb-card-text>
     </mdb-card-body>
 </mdb-card>
@@ -65,7 +69,7 @@
             <div class="modal-body mb-1">
 
                 <h5 class="mt-1 mb-2 text-center">Vehículo</h5>
-                <form ngForm (ngSubmit)="f.form.valid && guardar();matricula.valid?ferame.hide():'' " #f="ngForm">
+                <form ngForm (ngSubmit)="f.form.valid && ferame.hide();guardar(); " #f="ngForm">
                     <div class="md-form ml-0 mr-0">
                         <input type="text" type="text" id="matricula"
                                class="form-control form-control-sm ml-0"
@@ -80,23 +84,23 @@
                     </div>
 
                     <div class="md-form ml-0 mr-0">
-                        <input type="text" type="text" id="codigo" class="form-control form-control-sm ml-0"
-                               mdbInput name="codigo" [(ngModel)]="vehiculo.codigo"
-                               [ngClass]="{ 'is-invalid': f.submitted && codigo.invalid }"
-                               #codigo="ngModel" required>
+                        <input type="text" type="text" id="codigo_interno" class="form-control form-control-sm ml-0"
+                               mdbInput name="codigo_interno" [(ngModel)]="vehiculo.codigo_interno"
+                               [ngClass]="{ 'is-invalid': f.submitted && codigo_interno.invalid }"
+                               #codigo_interno="ngModel" required>
 
-                        <label data-error="wrong" data-success="right" for="codigo" class="ml-0">Código interno</label>
-                        <div *ngIf="f.submitted && codigo.invalid" class="invalid-feedback">
-                            <div *ngIf="codigo.errors.required">El código es requerido</div>
+                        <label data-error="wrong" data-success="right" for="codigo_interno" class="ml-0">Código interno</label>
+                        <div *ngIf="f.submitted && codigo_interno.invalid" class="invalid-feedback">
+                            <div *ngIf="codigo_interno.errors.required">El código es requerido</div>
                         </div>
                     </div>
                     <div class="ml-0 mr-0">
-                        <label data-error="wrong" data-success="right" for="codigo" class="ml-0">Tipo vehículo</label>
-                        <select class="browser-default custom-select" name="tipo" [(ngModel)]="vehiculo.id_tipo"
+                        <label data-error="wrong" data-success="right" for="tipo" class="ml-0">Tipo vehículo</label>
+                        <select id="tipo" class="browser-default custom-select" name="tipo" [(ngModel)]="vehiculo.tipo"
                                 [ngClass]="{ 'is-invalid': f.submitted && tipo.invalid }"
                                 #tipo="ngModel" required>
 
-                            <option *ngFor="let tipo of tipos" [value]="tipo.value">{{tipo.label}}</option>
+                            <option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.nombre_tipo_vehiculo}}</option>
                         </select>
                         <div *ngIf="f.submitted && tipo.invalid" class="invalid-feedback">
                             <div *ngIf="tipo.errors.required">El tipo es requerido</div>

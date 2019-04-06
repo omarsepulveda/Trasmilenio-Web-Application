@@ -17,7 +17,7 @@ Si se quiere utilizar la misma de este proyecto
 
 Si se quiere verificar la versión de angular
 
-`ng new nombre_de_mi_app`
+`ng v`
 
 Para crear el proyecto en angular
 
@@ -70,6 +70,14 @@ Configuramos las variables iniciales del servicio
         }
     );
   }
+```
+
+Después llamamos nuestro servicio en app.module.ts
+
+```TypeScript
+providers: [
+        TipoVehiculoService
+]
 ```
 ## Validaciones con Angular
 

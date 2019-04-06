@@ -75,22 +75,21 @@
                 <!--Header-->
                 <div class="text-center">
                     <h3 class="dark-grey-text">
-                        <strong>Reportes</strong>
+                        <strong>Utilidades</strong>
                     </h3>
                     <hr>
                 </div>
                 <!--Body-->
                 <div class="text-center mt-3">
-                    <button mdbBtn style="width: 100%" type="button" size="lg" outline="true" color="danger" mdbWavesEffect>
-                        Vehículos <mdb-icon fas icon="bus-alt fa-1.9x" class="mr-1"></mdb-icon>
+                    <button (click)="basicModal.show(); title = 'Vehículos'" mdbBtn style="width: 100%" type="button" size="lg" outline="true" color="danger" mdbWavesEffect>
+                        Reporte Vehículos <mdb-icon fas icon="bus-alt fa-1.9x" class="mr-1"></mdb-icon>
                     </button>
 
-                    <button mdbBtn style="width: 100%" type="button" size="lg" outline="true" color="warning" mdbWavesEffect>
-                        Troncales <mdb-icon fas icon="road fa-1.9x" class="mr-1"></mdb-icon>
+                    <button (click)="showGenerate()" mdbBtn style="width: 100%" type="button" size="lg" outline="true" color="warning" mdbWavesEffect>
+                        Generador de datos <mdb-icon fas icon="database fa-1.9x" class="mr-1"></mdb-icon>
                     </button>
-
-                    <button mdbBtn style="width: 100%" type="button" size="lg" outline="true" color="info" mdbWavesEffect>
-                        Rutas <mdb-icon fas icon="route fa-1.9x" class="mr-1"></mdb-icon>
+                    <button (click)="showUploadFile()" mdbBtn style="width: 100%" type="button" size="lg" outline="true" color="success" mdbWavesEffect>
+                        Cargar CSV <mdb-icon fas icon="route fa-1.9x" class="mr-1"></mdb-icon>
                     </button>
                 </div>
             </mdb-card-body>
@@ -100,3 +99,33 @@
     <!--Grid column-->
 </div>
 <!--Grid row-->
+
+<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">Reporte {{title}} ({{auxVehiculos.length}})</h4>
+            </div>
+            <div class="modal-body">
+                <div style="display: block">
+                    <canvas mdbChart
+                            [chartType]="chartType"
+                            [datasets]="chartDatasets"
+                            [labels]="chartLabels"
+                            [colors]="chartColors"
+                            [options]="chartOptions"
+                            [legend]="true"
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)">
+                    </canvas>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

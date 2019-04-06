@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {forEach} from '@angular/router/src/utils/collection';
+import {TipoVehiculoService} from '../../services/tipo-vehiculo.service';
+import {VehiculosService} from '../../services/vehiculos.service';
+import {Vehiculo} from '../../models/vehiculo';
+import Swal from 'sweetalert2';
+import {TipoVehiculo} from '../../models/tipo-vehiculo';
 
 @Component({
     selector: 'app-vehiculos',
@@ -8,33 +12,55 @@ import {forEach} from '@angular/router/src/utils/collection';
 })
 export class VehiculosComponent implements OnInit {
 
-    tipos = [
-        {value: '1', label: 'Microbus'},
-        {value: '2', label: 'Bus'},
-        {value: '3', label: 'Articulado'},
-        {value: '4', label: 'Alimentador'},
-        {value: '5', label: 'Biarticulado'},
-        {value: '6', label: 'Duales'},
-    ];
+    tipos: Array<TipoVehiculo> = [];
+    vehiculo: Vehiculo;
+    vehiculos: Array<Vehiculo> = [];
 
-    vehiculo: any;
+    constructor(private vehiculosService: VehiculosService, private tiposVehiculosService: TipoVehiculoService) {
+        this.vehiculo = new Vehiculo();
+        this.loadTipos();
+        this.loadVehiculos();
+    }
 
-    vehiculos: any;
+    loadTipos() {
+        this.tiposVehiculosService.get().subscribe((data: TipoVehiculo[]) => {
+            this.tipos = data;
+        }, error => {
+            Swal.fire(
+                'Ups!',
+                'Algo salio mal!' + error.message,
+                'warning'
+            );
+        });
+    }
 
-    constructor() {
-        this.vehiculo = {matricula: '', codigo: '', id_tipo: ''};
-        this.vehiculos = [
-            {id: 1, matricula: 'KEQ457', codigo: 'A107', tipo: 'Bus', id_tipo: 2},
-            {id: 2, matricula: 'EYZ619', codigo: 'B203', tipo: 'Microbus', id_tipo: 1},
-            {id: 3, matricula: 'FAC572', codigo: 'E604', tipo: 'Articulado', id_tipo: 3},
-            {id: 4, matricula: 'RSV171', codigo: 'C707', tipo: 'Articulado', id_tipo: 3},
-            {id: 5, matricula: 'TDB049', codigo: 'A809', tipo: 'Biarticulado', id_tipo: 5},
-            {id: 6, matricula: 'YFN679', codigo: 'D305', tipo: 'Bus', id_tipo: 2},
-            {id: 7, matricula: 'UGM020', codigo: 'A104', tipo: 'Biarticulado', id_tipo: 5},
-            {id: 8, matricula: 'IHL367', codigo: 'C406', tipo: 'Bus', id_tipo: 2},
-            {id: 9, matricula: 'OJJ001', codigo: 'A701', tipo: 'Duales', id_tipo: 6},
-            {id: 10, matricula: 'PKW715', codigo: 'A200', tipo: 'Bus', id_tipo: 2},
-        ];
+    loadVehiculos(): Vehiculo[] {
+        this.vehiculosService.get().subscribe((data: Vehiculo[]) => {
+            this.vehiculos = data;
+        }, error => {
+            Swal.fire(
+                'Ups!',
+                'Algo salio mal!' + error.message,
+                'warning'
+            );
+        });
+        return null;
+    }
+
+    getTipo(id): string {
+        if (id['id']) {
+            id = id['id'];
+        }
+        for (let tipo of this.tipos) {
+            if (tipo.id == id) {
+                return tipo.nombre_tipo_vehiculo;
+            }
+        }
+        return 'No encontrado';
+    }
+
+    clearVehiculo() {
+        this.vehiculo = new Vehiculo();
     }
 
     getLocalStorage(key) {
@@ -42,32 +68,95 @@ export class VehiculosComponent implements OnInit {
     }
 
     guardar() {
-        for(let t of this.tipos){
-            if (this.vehiculo.id_tipo === t.value){
-                this.vehiculo.tipo = t.label;
-                this.vehiculo.id = this.vehiculos.length+1;
-                break;
+        if (this.vehiculo.tipo !== undefined) {
+            if (this.vehiculo.id == undefined) {
+                this.vehiculosService.post(this.vehiculo).subscribe((data: Vehiculo) => {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Registro guardado.'
+                    });
+                    if (data){
+                        this.vehiculos.push(data);
+                    }else{
+                        this.vehiculosService.get().subscribe((data: Vehiculo[]) => {
+                            this.vehiculos = data;
+                        }, error => {
+                            Swal.fire(
+                                'Ups!',
+                                'Algo salio mal!' + error.message,
+                                'warning'
+                            );
+                        });
+                    }
+                }, error => {
+                    Swal.fire(
+                        'Ups!',
+                        'Algo salio mal!' + error.message,
+                        'warning'
+                    );
+                });
+            } else {
+                this.vehiculosService.put(this.vehiculo).subscribe((data: Vehiculo) => {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Actualización exitosa.'
+                    });
+                }, error => {
+                    Swal.fire(
+                        'Ups!',
+                        'Algo salio mal!' + error.message,
+                        'warning'
+                    );
+                });
             }
         }
-        this.vehiculos.push(this.vehiculo);
     }
 
     editar(v) {
-        this.limpiar();
         this.vehiculo = v;
+        this.vehiculo.tipo = v.tipo['id'];
     }
 
     eliminar(v) {
+        this.vehiculosService.delete(v).subscribe(r => {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            Toast.fire({
+                type: 'success',
+                title: 'Eliminación exitosa.'
+            });
+        }, error => {
+            Swal.fire(
+                'Ups!',
+                'Algo salio mal!' + error.message,
+                'warning'
+            );
+        });
         this.removeItemFromArr(this.vehiculos, v);
     }
 
     removeItemFromArr(arr, item) {
         let i = arr.indexOf(item);
         arr.splice(i, 1);
-    }
-
-    limpiar() {
-        this.vehiculo = {matricula: '', codigo: '', id_tipo: ''};
     }
 
     ngOnInit() {
