@@ -9,6 +9,10 @@ export class TroncalesComponent implements OnInit {
 
   constructor() { }
 
+  getLocalStorage(key){
+    return localStorage.getItem(key);
+  }
+
   ngOnInit() {
   }
 

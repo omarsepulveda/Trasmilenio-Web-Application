@@ -1,4 +1,4 @@
-# TransMilenio Integracion de Aplicaciones con Frameworks de Persistencia.
+# Transmilenio Integración de Aplicaciones con Frameworks de Persistencia.
 
 ## REQUERIMIENTOS
   * MySQL 8.0.15

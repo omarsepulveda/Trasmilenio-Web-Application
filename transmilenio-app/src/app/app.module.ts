@@ -9,6 +9,8 @@ import { VehiculosComponent } from './components/vehiculos/vehiculos.component';
 import { TroncalesComponent } from './components/troncales/troncales.component';
 import { PortalesComponent } from './components/portales/portales.component';
 import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 
 const appRoutes: Routes = [
     {path: '', component: IndexComponent},
@@ -28,7 +30,15 @@ const appRoutes: Routes = [
         BrowserModule,
         RouterModule.forRoot(appRoutes, {initialNavigation: 'enabled'}),
         MDBBootstrapModule.forRoot(),
-        HttpClientModule
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SweetAlert2Module.forRoot({
+            buttonsStyling: false,
+            customClass: 'modal-content',
+            confirmButtonClass: 'btn btn-primary',
+            cancelButtonClass: 'btn'
+        })
     ],
     providers: [],
     exports: [RouterModule],
