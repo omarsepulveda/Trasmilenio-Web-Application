@@ -15,15 +15,15 @@ class Troncal {
     static constraints = {
     }
 
-    static mapping = {
-        table 'portales'
-        version false
-        id_troncal column: 'id_troncal'
-        letra_troncal column: 'letra_troncal'
-        nombre_troncal column: 'nombre_troncal'
-        color_troncal column: 'color_troncal' 
-    }
-    public String toString(){
-       letra_troncal
-    } 
+    // static mapping = {
+    //     table 'troncales'
+    //     id_troncal column:'id_troncal'
+    //     letra_troncal column:'letra_troncal'
+    //     nombre_troncal column:'nombre_troncal'
+    //     color_troncal column:'color_troncal' 
+    // }
+
+    // public String toString(){
+    //    letra_troncal
+    // } 
 }

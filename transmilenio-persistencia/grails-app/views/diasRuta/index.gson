@@ -1,0 +1,8 @@
+import com.transmilenio.DiasRuta
+
+model {
+	Iterable<DiasRuta> diasRutaList
+}
+
+json tmpl.diasRuta(diasRutaList ?: [])
+

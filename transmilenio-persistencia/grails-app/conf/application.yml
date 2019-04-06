@@ -81,16 +81,20 @@ environments:
         dataSource:
             # dbCreate: create-drop #Para desarrollo crear y eliminar la BD siempre
             # url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
-            dbCreate: create-drop  #solo agrega
+            dbCreate: update #solo agrega
             url: jdbc:mysql://localhost:3306/transmilenio
+            # url: jdbc:mysql://localhost:3306/db_transmilenio?useSSL=false
+            #url: jdbc:mysql://localhost:3306/db_transmilenio
     test:
         dataSource:
             dbCreate: update
             url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     production:
         dataSource:
-            dbCreate: none
-            url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            dbCreate: update #solo agrega
+            #url: jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            url: jdbc:mysql://localhost:3306/transmilenio
+            # url: jdbc:mysql://localhost:3306/db_transmilenio?useSSL=false
             properties:
                 jmxEnabled : true
                 initialSize : 5

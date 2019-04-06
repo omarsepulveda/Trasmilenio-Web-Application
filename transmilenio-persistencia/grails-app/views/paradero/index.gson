@@ -1,0 +1,8 @@
+import com.transmilenio.Paradero
+
+model {
+	Iterable<Paradero> paraderoList
+}
+
+json tmpl.paradero(paraderoList ?: [])
+

@@ -13,15 +13,6 @@ class TroncalController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond troncalService.list(params), model:[troncalCount: troncalService.count()]
-        def book = new Troncal(id_troncal: 2, letra_troncal:"F", nombre_troncal:"Americas", color_troncal: "Rojo")  
-        println (book.color_troncal)
-        if (!book.save()) {
-            b.errors.each {
-                println ("Holas")
-            }
-        }
-        def p = Troncal.get(7)
-        assert 7 == p.id
     }
 
     def show(Long id) {
@@ -36,7 +27,7 @@ class TroncalController {
 
         try {
             troncalService.save(troncal)
-        } catch (ValidationException e) {
+        } catch (ValidationException e) {Troncal
             respond troncal.errors, view:'create'
             return
         }
@@ -63,11 +54,11 @@ class TroncalController {
     def delete(Long id) {
         if (id == null) {
             render status: NOT_FOUND
-            return
+            returnTroncal
         }
 
         troncalService.delete(id)
 
-        render status: NO_CONTENT
+        render status: NO_CONTENTTroncal
     }
 }

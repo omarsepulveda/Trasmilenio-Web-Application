@@ -1,0 +1,8 @@
+import com.transmilenio.TipoParada
+
+model {
+	Iterable<TipoParada> tipoParadaList
+}
+
+json tmpl.tipoParada(tipoParadaList ?: [])
+

@@ -1,0 +1,7 @@
+import com.proyecto.Vehiculo
+
+model {
+	Vehiculo vehiculo
+}
+
+json g.render(vehiculo, [resolveTemplate: false])

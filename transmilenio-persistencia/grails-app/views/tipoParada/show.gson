@@ -1,0 +1,7 @@
+import com.transmilenio.TipoParada
+
+model {
+	TipoParada tipoParada
+}
+
+json tmpl.tipoParada(tipoParada)

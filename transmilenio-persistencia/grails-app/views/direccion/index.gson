@@ -1,0 +1,8 @@
+import com.transmilenio.Direccion
+
+model {
+	Iterable<Direccion> direccionList
+}
+
+json tmpl.direccion(direccionList ?: [])
+

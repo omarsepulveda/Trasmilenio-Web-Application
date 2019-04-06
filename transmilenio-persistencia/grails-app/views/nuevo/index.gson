@@ -1,0 +1,8 @@
+import com.transmilenio.Nuevo
+
+model {
+	Iterable<Nuevo> nuevoList
+}
+
+json tmpl.nuevo(nuevoList ?: [])
+

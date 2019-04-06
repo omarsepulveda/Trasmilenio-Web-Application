@@ -1,0 +1,7 @@
+import com.transmilenio.VehiculoRuta
+
+model {
+	VehiculoRuta vehiculoRuta
+}
+
+json g.render(vehiculoRuta, [resolveTemplate: false])

@@ -13,9 +13,9 @@ class VehiculoController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond vehiculoService.list(params), model:[vehiculoCount: vehiculoService.count()]
-        def book = new Vehiculo(id_vehiculo: 1, matricula:"ABC123", codigo_interno:"UTR89", id_tipo_vehiculo: 1)  
-        println (book.id_vehiculo)
-        println (book.save())
+        // def book = new Vehiculo(id_vehiculo: 1, matricula:"ABC123", codigo_interno:"UTR89", id_tipo_vehiculo: 1)  
+        // println (book.matricula)
+        // println (book.save())
     }
 
     def show(Long id) {
