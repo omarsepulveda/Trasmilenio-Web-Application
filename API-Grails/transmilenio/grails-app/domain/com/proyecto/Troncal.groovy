@@ -1,6 +1,7 @@
 package com.proyecto
 
 class Troncal {
+    static hasMany = [estaciones:Estacion]
     String letra_troncal
     String nombre_troncal
     String color_troncal
