@@ -47,7 +47,7 @@
         </tr>
         </tbody>
       </table>
-      <app-angular-paginator nextText="Siguiente" previousText="Anterior" id="ANGULAR_PAGINATOR_DEFAULT" className="ANGULAR_PAGINATOR_DEFAULT" (pageChange)="currentPage = $event"></app-angular-paginator>
+      <app-angular-paginator *ngIf="estaciones.length > 10" nextText="Siguiente" previousText="Anterior" id="ANGULAR_PAGINATOR_DEFAULT" className="ANGULAR_PAGINATOR_DEFAULT" (pageChange)="currentPage = $event"></app-angular-paginator>
       <label *ngIf="troncales.length < 1">
         <p class="text-center">No se encontraron registros.</p>
       </label>

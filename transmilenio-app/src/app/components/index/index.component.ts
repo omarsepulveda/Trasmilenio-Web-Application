@@ -22,7 +22,6 @@ export class IndexComponent implements OnInit {
     aux: object[] = [];
     auxVehiculos: Vehiculo[] = [];
     file: File;
-    contentFile: string;
 
     constructor(private router: Router, private vehiculosService: VehiculosService, private tipos: TipoVehiculoService) {
         this.usuario = {correo: '', contrasena: ''};
@@ -54,9 +53,10 @@ export class IndexComponent implements OnInit {
                 }
             });
             const reader = new FileReader;
-            reader.onload = (e) => {
+            reader.onload = async (e: Event) => {
                 var result = [];
-                const csv = e.target.result;
+                let target: any = e.target;
+                const csv = target.result;
                 if (csv !== undefined) {
                     const lines = csv.split('\n');
                     const headers = lines[0].split(',');
