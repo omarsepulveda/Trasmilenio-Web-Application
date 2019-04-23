@@ -14,15 +14,15 @@ import {TipoVehiculo} from '../../models/tipo-vehiculo';
 export class IndexComponent implements OnInit {
 
     usuario: any;
-    data: any = {correo: 'admin@admin.com', contrasena: 'admin'};
+    data: any = {correo: 'admin', contrasena: 'admin'};
     public chartType: string = 'bar';
     title = '';
     values: number[] = [];
     labels: string[] = [];
     aux: object[] = [];
     auxVehiculos: Vehiculo[] = [];
-
     file: File;
+    contentFile: string;
 
     constructor(private router: Router, private vehiculosService: VehiculosService, private tipos: TipoVehiculoService) {
         this.usuario = {correo: '', contrasena: ''};
@@ -30,14 +30,6 @@ export class IndexComponent implements OnInit {
         this.vehiculosService.get().subscribe((vehiculos: Vehiculo[]) => {
             this.auxVehiculos = vehiculos;
         });
-    }
-
-    onFileAdd(file: File) {
-        this.file = file;
-    }
-
-    onFileRemove() {
-        this.file = null;
     }
 
     async showUploadFile() {
@@ -51,34 +43,43 @@ export class IndexComponent implements OnInit {
         });
 
         if (file) {
+            let timerInterval;
+            Swal.fire({
+                title: 'Cargando datos', html: 'Espere un momento por favor', onBeforeOpen: () => {
+                    Swal.showLoading();
+                    timerInterval = setInterval(() => {}, 100);
+                },
+                onClose: () => {
+                    clearInterval(timerInterval);
+                }
+            });
             const reader = new FileReader;
             reader.onload = (e) => {
-
+                var result = [];
+                const csv = e.target.result;
+                if (csv !== undefined) {
+                    const lines = csv.split('\n');
+                    const headers = lines[0].split(',');
+                    for (let i = 1; i < lines.length; i++) {
+                        const obj = {};
+                        const currentline = lines[i].split(',');
+                        for (let j = 0; j < headers.length; j++) {
+                            obj[headers[j]] = currentline[j];
+                        }
+                        result.push(obj);
+                    }
+                }
+                Swal.fire({
+                    title: 'Oops...',
+                    text: JSON.stringify(result),
+                });
+                for (let v of result) {
+                    this.vehiculosService.post(v).subscribe();
+                }
+                Swal.close();
+                this.router.navigate(['vehiculos']);
             };
-            reader.readAsDataURL(file);
-            console.log(reader);
-        }
-    }
-
-    csvJSON(csv) {
-
-        var lines = csv.split('\n');
-
-        var result = [];
-
-        var headers = lines[0].split(',');
-
-        for (var i = 1; i < lines.length; i++) {
-
-            var obj = {};
-            var currentline = lines[i].split(',');
-
-            for (var j = 0; j < headers.length; j++) {
-                obj[headers[j]] = currentline[j];
-            }
-
-            result.push(obj);
-
+            reader.readAsText(file);
         }
     }
 
@@ -180,7 +181,7 @@ export class IndexComponent implements OnInit {
 
             Toast.fire({
                 type: 'success',
-                title: 'Bienvenido :D'
+                title: 'Bienvenido ' + this.data.correo
             });
         } else {
             const Toast = Swal.mixin({

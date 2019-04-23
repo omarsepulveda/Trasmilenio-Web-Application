@@ -12,7 +12,7 @@ export class VehiculosService {
     httpHeadersGET: HttpHeaders;
     httpHeadersPOST: HttpHeaders;
 
-    constructor(private http: HttpClient, private appGlobals: AppGlobals) {
+    constructor(public http: HttpClient, private appGlobals: AppGlobals) {
         this.url = appGlobals.ip + 'Vehiculo';
         this.httpHeadersGET = new HttpHeaders({
                 'Content-Type': 'text/plain',
@@ -44,5 +44,4 @@ export class VehiculosService {
     generador(cantidad: number) {
         return this.http.get(this.appGlobals.ip + 'Generar?max=' + cantidad);
     }
-
 }

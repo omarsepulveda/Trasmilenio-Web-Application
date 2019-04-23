@@ -1,0 +1,121 @@
+<mdb-card cascade="true" wider="true" reverse="true" class="my-4">
+  <!-- Card content -->
+  <mdb-card-body cascade="true" class="text-center">
+    <!--Title-->
+    <mdb-card-title>
+      <h3>
+        <strong>Estaciones</strong>
+        <div *ngIf="getLocalStorage('correo')" class="btn-group" mdbDropdown (click)="ferame.show(); clearEstacion()">
+          <mdb-icon fas icon="plus-circle teal-text mx-4" size="1x"
+                    mdbDropdownToggle class="waves-effect" mdbWavesEffect>
+          </mdb-icon>
+        </div>
+      </h3>
+    </mdb-card-title>
+    <!--Title-->
+    <mdb-card-text>
+      <table *ngIf="estaciones.length > 0" mdbTable mdbTableScroll bordered="true"
+             class="table table-striped table-responsive-md btn-table"
+             scrollY="true" maxHeight="450">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Troncal</th>
+          <th>Imagen</th>
+          <th *ngIf="getLocalStorage('correo')">Acción</th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let e of estaciones | angularPaginator: { currentPage: currentPage}">
+        <tr mdbTableCol>
+          <th scope="row">{{e.id}}</th>
+          <td>{{e.nombre_estacion}}</td>
+          <td>{{getTtroncal(e.troncal)}}</td>
+          <td>{{e.imagen_estacion}}</td>
+          <td *ngIf="getLocalStorage('correo')">
+            <div class="btn-group" mdbDropdown>
+              <mdb-icon fas icon="cog indigo-text" size="2x" classInside="dropdown-toggle"
+                        mdbDropdownToggle class="waves-effect" mdbWavesEffect>
+              </mdb-icon>
+              <div class="dropdown-menu dropdown-primary">
+                <a class="dropdown-item" (click)="ferame.show();editar(e)">Editar</a>
+                <a class="dropdown-item" (click)="eliminar(e)">Borrar</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <app-angular-paginator nextText="Siguiente" previousText="Anterior" id="ANGULAR_PAGINATOR_DEFAULT" className="ANGULAR_PAGINATOR_DEFAULT" (pageChange)="currentPage = $event"></app-angular-paginator>
+      <label *ngIf="troncales.length < 1">
+        <p class="text-center">No se encontraron registros.</p>
+      </label>
+    </mdb-card-text>
+  </mdb-card-body>
+</mdb-card>
+
+<div mdbModal class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" #ferame="mdbModal">
+  <div class="modal-dialog cascading-modal modal-avatar" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header">
+        <img src="assets/img/estacion.ico" alt="portal" class="rounded-circle img-responsive">
+      </div>
+      <!--Body-->
+      <div class="modal-body mb-1">
+
+        <h5 class="mt-1 mb-2 text-center">Estación</h5>
+        <form ngForm (ngSubmit)="f.form.valid && ferame.hide();guardar(); " #f="ngForm">
+          <div class="md-form ml-0 mr-0">
+            <input type="text" type="text" id="nombre_estacion"
+                   class="form-control form-control-sm ml-0"
+                   mdbInput name="nombre_estacion" [(ngModel)]="estacion.nombre_estacion"
+                   [ngClass]="{ 'is-invalid': f.submitted && nombre_estacion.invalid }"
+                   #nombre_estacion="ngModel" required>
+
+            <label data-error="wrong" data-success="right" for="nombre_estacion" class="ml-0">Nombre</label>
+            <div *ngIf="f.submitted && nombre_estacion.invalid" class="invalid-feedback">
+              <div *ngIf="nombre_estacion.errors.required">Este campo es requerido</div>
+            </div>
+          </div>
+
+          <div class="md-form ml-0 mr-0">
+            <input type="text" type="text" id="imagen_estacion" class="form-control form-control-sm ml-0"
+                   mdbInput name="imagen_estacion" [(ngModel)]="estacion.imagen_estacion"
+                   [ngClass]="{ 'is-invalid': f.submitted && imagen_estacion.invalid }"
+                   #imagen_estacion="ngModel" required>
+
+            <label data-error="wrong" data-success="right" for="imagen_estacion" class="ml-0">URL imagen</label>
+            <div *ngIf="f.submitted && imagen_estacion.invalid" class="invalid-feedback">
+              <div *ngIf="imagen_estacion.errors.required">Este campo es requerido</div>
+            </div>
+          </div>
+          <div class="ml-0 mr-0">
+            <label data-error="wrong" data-success="right" for="troncal" class="ml-0">Troncal</label>
+            <select id="troncal" class="browser-default custom-select" name="troncal" [(ngModel)]="estacion.troncal"
+                    [ngClass]="{ 'is-invalid': f.submitted && troncal.invalid }"
+                    #troncal="ngModel" required>
+
+              <option *ngFor="let troncal of troncales" [value]="troncal.id">{{troncal.nombre_troncal}}</option>
+            </select>
+            <div *ngIf="f.submitted && troncal.invalid" class="invalid-feedback">
+              <div *ngIf="troncal.errors.required">Este campo es requerido</div>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <button  mdbBtn color="cyan" rounded="true" class="mt-1 waves-light" mdbWavesEffect>
+              Guardar
+              <mdb-icon fas icon="check ml-1"></mdb-icon>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>

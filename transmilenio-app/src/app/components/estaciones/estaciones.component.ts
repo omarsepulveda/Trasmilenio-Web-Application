@@ -1,31 +1,31 @@
 import {Component, OnInit} from '@angular/core';
-import {TipoVehiculoService} from '../../services/tipo-vehiculo.service';
-import {VehiculosService} from '../../services/vehiculos.service';
-import {Vehiculo} from '../../models/vehiculo';
+import {Troncal} from '../../models/troncal';
+import {TroncalService} from '../../services/troncal.service';
 import Swal from 'sweetalert2';
-import {TipoVehiculo} from '../../models/tipo-vehiculo';
+import {Estacion} from '../../models/estacion';
+import {EstacionService} from '../../services/estacion.service';
 
 @Component({
-    selector: 'app-vehiculos',
-    templateUrl: './vehiculos.component.html',
-    styleUrls: ['./vehiculos.component.scss']
+    selector: 'app-estaciones',
+    templateUrl: './estaciones.component.html',
+    styleUrls: ['./estaciones.component.scss']
 })
-export class VehiculosComponent implements OnInit {
+export class EstacionesComponent implements OnInit {
 
-    tipos: Array<TipoVehiculo> = [];
-    vehiculo: Vehiculo;
-    vehiculos: Array<Vehiculo> = [];
+    troncales: Array<Troncal> = [];
+    estacion: Estacion;
+    estaciones: Array<Estacion> = [];
     currentPage;
 
-    constructor(private vehiculosService: VehiculosService, private tiposVehiculosService: TipoVehiculoService) {
-        this.vehiculo = new Vehiculo();
-        this.loadTipos();
-        this.loadVehiculos();
+    constructor(private estacionService: EstacionService, private troncalService: TroncalService) {
+        this.estacion = new Estacion();
+        this.loadTroncales();
+        this.loadEstaciones();
     }
 
-    loadTipos() {
-        this.tiposVehiculosService.get().subscribe((data: TipoVehiculo[]) => {
-            this.tipos = data;
+    loadTroncales() {
+        this.troncalService.get().subscribe((data: Troncal[]) => {
+            this.troncales = data;
         }, error => {
             Swal.fire(
                 'Ups!',
@@ -35,9 +35,9 @@ export class VehiculosComponent implements OnInit {
         });
     }
 
-    loadVehiculos(): Vehiculo[] {
-        this.vehiculosService.get().subscribe((data: Vehiculo[]) => {
-            this.vehiculos = data;
+    loadEstaciones(): Estacion[] {
+        this.estacionService.get().subscribe((data: Estacion[]) => {
+            this.estaciones = data;
         }, error => {
             Swal.fire(
                 'Ups!',
@@ -48,20 +48,20 @@ export class VehiculosComponent implements OnInit {
         return null;
     }
 
-    getTipo(id): string {
+    getTtroncal(id): string {
         if (id['id']) {
             id = id['id'];
         }
-        for (let tipo of this.tipos) {
-            if (tipo.id == id) {
-                return tipo.nombre_tipo_vehiculo;
+        for (let troncal of this.troncales) {
+            if (troncal.id == id) {
+                return troncal.nombre_troncal;
             }
         }
         return 'No encontrado';
     }
 
-    clearVehiculo() {
-        this.vehiculo = new Vehiculo();
+    clearEstacion() {
+        this.estacion = new Estacion();
     }
 
     getLocalStorage(key) {
@@ -69,9 +69,9 @@ export class VehiculosComponent implements OnInit {
     }
 
     guardar() {
-        if (this.vehiculo.tipo !== undefined) {
-            if (this.vehiculo.id == undefined) {
-                this.vehiculosService.post(this.vehiculo).subscribe((data: Vehiculo) => {
+        if (this.estacion.imagen_estacion !== undefined) {
+            if (this.estacion.id == undefined) {
+                this.estacionService.post(this.estacion).subscribe((data: Estacion) => {
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top',
@@ -83,12 +83,12 @@ export class VehiculosComponent implements OnInit {
                         type: 'success',
                         title: 'Registro guardado.'
                     });
-                    if (data){
-                        this.vehiculo = new Vehiculo();
-                        this.loadVehiculos();
-                    }else{
-                        this.vehiculosService.get().subscribe((data: Vehiculo[]) => {
-                            this.vehiculos = data;
+                    if (data) {
+                        this.estacion = new Estacion();
+                        this.loadEstaciones();
+                    } else {
+                        this.estacionService.get().subscribe((data: Estacion[]) => {
+                            this.estaciones = data;
                         }, error => {
                             Swal.fire(
                                 'Ups!',
@@ -105,7 +105,7 @@ export class VehiculosComponent implements OnInit {
                     );
                 });
             } else {
-                this.vehiculosService.put(this.vehiculo).subscribe((data: Vehiculo) => {
+                this.estacionService.put(this.estacion).subscribe((data: Estacion) => {
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top',
@@ -129,19 +129,19 @@ export class VehiculosComponent implements OnInit {
     }
 
     editar(v) {
-        this.vehiculo = v;
-        this.vehiculo.tipo = v.tipo['id'];
+        this.estacion = v;
+        this.estacion.troncal = v.troncal_id['id'];
     }
 
     eliminar(v) {
-        this.vehiculosService.delete(v).subscribe(r => {
+        this.estacionService.delete(v).subscribe(r => {
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top',
                 showConfirmButton: false,
                 timer: 3000
             });
-            this.loadVehiculos()
+            this.loadEstaciones();
             Toast.fire({
                 type: 'success',
                 title: 'Eliminación exitosa.'

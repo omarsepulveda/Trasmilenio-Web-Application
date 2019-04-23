@@ -15,13 +15,19 @@ import {TipoVehiculoService} from './services/tipo-vehiculo.service';
 import {VehiculosService} from './services/vehiculos.service';
 import {AppGlobals} from './models/appGlobals';
 import { TipoVehiculoComponent } from './components/tipo-vehiculo/tipo-vehiculo.component';
+import {AngularPaginatorModule} from 'angular-paginator';
+import { EstacionesComponent } from './components/estaciones/estaciones.component';
+import {TroncalService} from './services/troncal.service';
+import {PortalService} from './services/portal.service';
+import {EstacionService} from './services/estacion.service';
 
 const appRoutes: Routes = [
     {path: '', component: IndexComponent},
     {path: 'vehiculos', component: VehiculosComponent},
     {path: 'troncales', component: TroncalesComponent},
     {path: 'portales', component: PortalesComponent},
-    {path: 'tipos-vehiculo', component: TipoVehiculoComponent}
+    {path: 'tipos-vehiculo', component: TipoVehiculoComponent},
+    {path: 'estaciones', component: EstacionesComponent},
 ];
 
 @NgModule({
@@ -32,6 +38,7 @@ const appRoutes: Routes = [
         TroncalesComponent,
         PortalesComponent,
         TipoVehiculoComponent,
+        EstacionesComponent,
     ],
     imports: [
         BrowserModule,
@@ -40,6 +47,7 @@ const appRoutes: Routes = [
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
+        AngularPaginatorModule,
         SweetAlert2Module.forRoot({
             buttonsStyling: false,
             customClass: 'modal-content',
@@ -50,7 +58,10 @@ const appRoutes: Routes = [
     providers: [
         AppGlobals,
         TipoVehiculoService,
-        VehiculosService
+        VehiculosService,
+        TroncalService,
+        PortalService,
+        EstacionService,
     ],
     exports: [RouterModule],
     bootstrap: [AppComponent]

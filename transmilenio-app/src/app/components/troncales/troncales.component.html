@@ -1,1 +1,125 @@
-<h1 class="white-text display-4 font-weight-bold">troncales works!</h1>
+<mdb-card cascade="true" wider="true" reverse="true" class="my-4">
+    <!-- Card content -->
+    <mdb-card-body cascade="true" class="text-center">
+        <!--Title-->
+        <mdb-card-title>
+            <h3>
+                <strong>Troncales</strong>
+                <div *ngIf="getLocalStorage('correo')" class="btn-group" mdbDropdown
+                     (click)="ferame.show(); clearObject()">
+                    <mdb-icon fas icon="plus-circle teal-text mx-4" size="1x"
+                              mdbDropdownToggle class="waves-effect" mdbWavesEffect>
+                    </mdb-icon>
+                </div>
+            </h3>
+        </mdb-card-title>
+        <!--Title-->
+        <mdb-card-text>
+            <table *ngIf="troncales.length > 0" mdbTable mdbTableScroll bordered="true"
+                   class="table table-striped table-responsive-md btn-table"
+                   scrollY="true" maxHeight="400">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Letra</th>
+                    <th>Nombre</th>
+                    <th>Color</th>
+                    <th *ngIf="getLocalStorage('correo')">Acción</th>
+                </tr>
+                </thead>
+
+                <tbody *ngFor="let t of troncales | angularPaginator: { currentPage: currentPage}">
+                <tr mdbTableCol>
+                    <th scope="row" class="align-middle">{{t.id}}</th>
+                    <td>{{t.letra_troncal}}</td>
+                    <td>{{t.nombre_troncal}}</td>
+                    <td>{{t.color_troncal}}</td>
+                    <td *ngIf="getLocalStorage('correo')">
+                        <div class="btn-group" mdbDropdown>
+                            <mdb-icon fas icon="cog indigo-text" size="2x" classInside="dropdown-toggle"
+                                      mdbDropdownToggle class="waves-effect" mdbWavesEffect>
+                            </mdb-icon>
+                            <div class="dropdown-menu dropdown-primary">
+                                <a class="dropdown-item" (click)="ferame.show();editar(t)">Editar</a>
+                                <a class="dropdown-item" (click)="eliminar(t)">Borrar</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <app-angular-paginator nextText="Siguiente" previousText="Anterior" id="ANGULAR_PAGINATOR_DEFAULT" className="ANGULAR_PAGINATOR_DEFAULT" (pageChange)="currentPage = $event"></app-angular-paginator>
+            <label *ngIf="troncales.length < 1">
+                <p class="text-center">No se encontraron registros.</p>
+            </label>
+        </mdb-card-text>
+    </mdb-card-body>
+</mdb-card>
+
+<div mdbModal class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" #ferame="mdbModal">
+    <div class="modal-dialog cascading-modal modal-avatar" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header">
+                <img src="assets/img/troncal.ico" alt="troncal" class="rounded-circle img-responsive">
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-1">
+
+                <h5 class="mt-1 mb-2 text-center">Troncal</h5>
+                <form ngForm (ngSubmit)="f.form.valid && ferame.hide();guardar(); " #f="ngForm">
+                    <div class="md-form ml-0 mr-0">
+                        <input type="text" type="text" id="letra_troncal"
+                               class="form-control form-control-sm ml-0"
+                               mdbInput name="letra_troncal" [(ngModel)]="troncal.letra_troncal"
+                               [ngClass]="{ 'is-invalid': f.submitted && letra_troncal.invalid }"
+                               #letra_troncal="ngModel" required>
+
+                        <label data-error="wrong" data-success="right" for="letra_troncal" class="ml-0">Letra</label>
+                        <div *ngIf="f.submitted && letra_troncal.invalid" class="invalid-feedback">
+                            <div *ngIf="letra_troncal.errors.required">Este campo es requerido</div>
+                        </div>
+                    </div>
+
+                    <div class="md-form ml-0 mr-0">
+                        <input type="text" type="text" id="nombre_troncal" class="form-control form-control-sm ml-0"
+                               mdbInput name="nombre_troncal" [(ngModel)]="troncal.nombre_troncal"
+                               [ngClass]="{ 'is-invalid': f.submitted && nombre_troncal.invalid }"
+                               #nombre_troncal="ngModel" required>
+
+                        <label data-error="wrong" data-success="right" for="nombre_troncal" class="ml-0">Nombre</label>
+                        <div *ngIf="f.submitted && nombre_troncal.invalid" class="invalid-feedback">
+                            <div *ngIf="nombre_troncal.errors.required">El código es requerido</div>
+                        </div>
+                    </div>
+
+                    <div class="md-form ml-0 mr-0">
+                        <input type="text" type="text" id="color_troncal" class="form-control form-control-sm ml-0"
+                               mdbInput name="color_troncal" [(ngModel)]="troncal.color_troncal"
+                               [ngClass]="{ 'is-invalid': f.submitted && color_troncal.invalid }"
+                               #color_troncal="ngModel" required>
+
+                        <label data-error="wrong" data-success="right" for="color_troncal"
+                               class="ml-0">Color</label>
+                        <div *ngIf="f.submitted && color_troncal.invalid" class="invalid-feedback">
+                            <div *ngIf="color_troncal.errors.required">El código es requerido</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button mdbBtn color="cyan" rounded="true" class="mt-1 waves-light" mdbWavesEffect>
+                            Guardar
+                            <mdb-icon fas icon="check ml-1"></mdb-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+

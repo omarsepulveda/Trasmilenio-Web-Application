@@ -31,6 +31,11 @@
                     <a class="nav-link" routerLink="/portales" routerLinkActive="active">Portales<span
                             class="sr-only">(current)</span></a>
                 </li>
+                <li [ngClass]="{'active': conClase==='e'}" class="nav-item waves-light" mdbWavesEffect
+                    (click)="conClase = 'e'">
+                    <a class="nav-link" routerLink="/estaciones" routerLinkActive="active">Estaciones<span
+                            class="sr-only">(current)</span></a>
+                </li>
             </ul>
             <ul *ngIf="getLocalStorage('correo') !== null" class="navbar-nav ml-auto nav-flex-icons">
                 <li class="nav-item dropdown" dropdown>

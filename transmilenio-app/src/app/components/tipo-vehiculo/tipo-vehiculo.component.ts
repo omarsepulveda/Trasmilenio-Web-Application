@@ -11,12 +11,110 @@ import {TipoVehiculoService} from '../../services/tipo-vehiculo.service';
 export class TipoVehiculoComponent implements OnInit {
 
     tipos: Array<TipoVehiculo> = [];
+    tipo: TipoVehiculo;
+    currentPage;
 
     constructor(private tiposVehiculosService: TipoVehiculoService) {
+        this.tipo = new TipoVehiculo();
         this.loadTipos();
     }
 
     ngOnInit() {
+    }
+
+    clearObject() {
+        this.tipo = new TipoVehiculo();
+    }
+
+    guardar() {
+        if (this.tipo.nombre_tipo_vehiculo !== undefined) {
+            if (this.tipo.id == undefined) {
+                this.tiposVehiculosService.post(this.tipo).subscribe((data: TipoVehiculo) => {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Registro guardado.'
+                    });
+                    if (data){
+                        this.tipo = new TipoVehiculo();
+                        this.loadTipos();
+                    }else{
+                        this.tiposVehiculosService.get().subscribe((data: TipoVehiculo[]) => {
+                            this.tipos = data;
+                        }, error => {
+                            Swal.fire(
+                                'Ups!',
+                                'Algo salio mal!' + error.message,
+                                'warning'
+                            );
+                        });
+                    }
+                }, error => {
+                    Swal.fire(
+                        'Ups!',
+                        'Algo salio mal!' + error.message,
+                        'warning'
+                    );
+                });
+            } else {
+                this.tiposVehiculosService.put(this.tipo).subscribe((data: TipoVehiculo) => {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    Toast.fire({
+                        type: 'success',
+                        title: 'Actualización exitosa.'
+                    });
+                }, error => {
+                    Swal.fire(
+                        'Ups!',
+                        'Algo salio mal!' + error.message,
+                        'warning'
+                    );
+                });
+            }
+        }
+    }
+
+    editar(vTipo: TipoVehiculo) {
+        this.tipo = vTipo;
+        this.tipo.id = vTipo.id;
+    }
+
+    eliminar(vTipo) {
+        this.tiposVehiculosService.delete(vTipo).subscribe(r => {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            this.loadTipos();
+            Toast.fire({
+                type: 'success',
+                title: 'Eliminación exitosa.'
+            });
+        }, error => {
+            Swal.fire(
+                'Ups!',
+                'Algo salio mal!' + error.message,
+                'warning'
+            );
+        });
+    }
+
+    getLocalStorage(key) {
+        return localStorage.getItem(key);
     }
 
     loadTipos() {

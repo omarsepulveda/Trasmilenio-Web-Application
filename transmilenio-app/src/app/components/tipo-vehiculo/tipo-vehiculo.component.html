@@ -5,6 +5,12 @@
         <mdb-card-title>
             <h3>
                 <strong>Tipos de Vehiculos</strong>
+                <div *ngIf="getLocalStorage('correo')" class="btn-group" mdbDropdown
+                     (click)="ferame.show(); clearObject()">
+                    <mdb-icon fas icon="plus-circle teal-text mx-4" size="1x"
+                              mdbDropdownToggle class="waves-effect" mdbWavesEffect>
+                    </mdb-icon>
+                </div>
             </h3>
         </mdb-card-title>
         <!--Title-->
@@ -18,11 +24,12 @@
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Imagen</th>
+                    <th *ngIf="getLocalStorage('correo')">Acción</th>
                 </tr>
                 </thead>
 
-                <tbody *ngFor="let t of tipos">
-                <tr mdbTableCol (click)="showModal(t)" style="cursor: pointer;">
+                <tbody *ngFor="let t of tipos | angularPaginator: { currentPage: currentPage}">
+                <tr mdbTableCol>
                     <th scope="row" class="align-middle">{{t.id}}</th>
                     <td>{{t.nombre_tipo_vehiculo}}</td>
                     <td>
@@ -30,7 +37,7 @@
                             {{t.descripcion_tipo_vehiculo}}
                         </div>
                     </td>
-                    <td>
+                    <td (click)="showModal(t)" style="cursor: pointer;">
                         <div class="view overlay">
                             <img src="{{t.imagen_tipo_vehiculo}}"
                                  class="img-fluid" alt="Sample image with waves effect.">
@@ -39,13 +46,92 @@
                             </a>
                         </div>
                     </td>
+                    <td *ngIf="getLocalStorage('correo')">
+                        <div class="btn-group" mdbDropdown>
+                            <mdb-icon fas icon="cog indigo-text" size="2x" classInside="dropdown-toggle"
+                                      mdbDropdownToggle class="waves-effect" mdbWavesEffect>
+                            </mdb-icon>
+                            <div class="dropdown-menu dropdown-primary">
+                                <a class="dropdown-item" (click)="ferame.show();editar(t)">Editar</a>
+                                <a class="dropdown-item" (click)="eliminar(t)">Borrar</a>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
-
+            <app-angular-paginator nextText="Siguiente" previousText="Anterior" id="ANGULAR_PAGINATOR_DEFAULT" className="ANGULAR_PAGINATOR_DEFAULT" (pageChange)="currentPage = $event"></app-angular-paginator>
             <label *ngIf="tipos.length < 1">
                 <p class="text-center">No se encontraron registros.</p>
             </label>
         </mdb-card-text>
     </mdb-card-body>
 </mdb-card>
+
+<div mdbModal class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" #ferame="mdbModal">
+    <div class="modal-dialog cascading-modal modal-avatar" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Header-->
+            <div class="modal-header">
+                <img src="assets/img/tipo.ico" alt="vehículo" class="rounded-circle img-responsive">
+            </div>
+            <!--Body-->
+            <div class="modal-body mb-1">
+
+                <h5 class="mt-1 mb-2 text-center">Tipo Vehículo</h5>
+                <form ngForm (ngSubmit)="f.form.valid && ferame.hide();guardar(); " #f="ngForm">
+                    <div class="md-form ml-0 mr-0">
+                        <input type="text" type="text" id="nombre"
+                               class="form-control form-control-sm ml-0"
+                               mdbInput name="nombre" [(ngModel)]="tipo.nombre_tipo_vehiculo"
+                               [ngClass]="{ 'is-invalid': f.submitted && nombre.invalid }"
+                               #nombre="ngModel" required>
+
+                        <label data-error="wrong" data-success="right" for="nombre" class="ml-0">Nombre</label>
+                        <div *ngIf="f.submitted && nombre.invalid" class="invalid-feedback">
+                            <div *ngIf="nombre.errors.required">Este campo es requerido</div>
+                        </div>
+                    </div>
+
+                    <div class="md-form ml-0 mr-0">
+                        <input type="text" type="text" id="url_imagen" class="form-control form-control-sm ml-0"
+                               mdbInput name="url_imagen" [(ngModel)]="tipo.imagen_tipo_vehiculo"
+                               [ngClass]="{ 'is-invalid': f.submitted && url_imagen.invalid }"
+                               #url_imagen="ngModel" required>
+
+                        <label data-error="wrong" data-success="right" for="url_imagen" class="ml-0">Url de la
+                            imagen</label>
+                        <div *ngIf="f.submitted && url_imagen.invalid" class="invalid-feedback">
+                            <div *ngIf="url_imagen.errors.required">Este campo es requerido</div>
+                        </div>
+                    </div>
+
+                    <div class="md-form ml-0 mr-0">
+                        <input type="text" type="text" id="descripcion" class="form-control form-control-sm ml-0"
+                               mdbInput name="descripcion" [(ngModel)]="tipo.descripcion_tipo_vehiculo"
+                               [ngClass]="{ 'is-invalid': f.submitted && descripcion.invalid }"
+                               #descripcion="ngModel" required>
+
+                        <label data-error="wrong" data-success="right" for="descripcion"
+                               class="ml-0">Descripción</label>
+                        <div *ngIf="f.submitted && descripcion.invalid" class="invalid-feedback">
+                            <div *ngIf="descripcion.errors.required">Este campo es requerido</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button mdbBtn color="cyan" rounded="true" class="mt-1 waves-light" mdbWavesEffect>
+                            Guardar
+                            <mdb-icon fas icon="check ml-1"></mdb-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!--/.Content-->
+    </div>
+</div>

@@ -34,11 +34,11 @@ export class TipoVehiculoService {
         return this.http.post(this.url, JSON.stringify(tipo), {headers: this.httpHeadersPOST});
     }
 
-    put(vehiculo: Vehiculo) {
-        return this.http.put(this.url + '/' + vehiculo.id, JSON.stringify(vehiculo), {headers: this.httpHeadersPOST});
+    put(tipo: TipoVehiculo) {
+        return this.http.put(this.url + '/' + tipo.id, JSON.stringify(tipo), {headers: this.httpHeadersPOST});
     }
 
-    delete(vehiculo: Vehiculo) {
-        return this.http.delete(this.url + '/' + vehiculo.id);
+    delete(tipo: TipoVehiculo) {
+        return this.http.delete(this.url + '/' + tipo.id);
     }
 }
