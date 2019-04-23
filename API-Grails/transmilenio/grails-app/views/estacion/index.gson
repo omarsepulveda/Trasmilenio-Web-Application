@@ -1,0 +1,8 @@
+import com.proyecto.Estacion
+
+model {
+	Iterable<Estacion> estacionList
+}
+
+json tmpl.estacion(estacionList ?: [])
+

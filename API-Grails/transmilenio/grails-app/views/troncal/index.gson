@@ -1,0 +1,8 @@
+import com.proyecto.Troncal
+
+model {
+	Iterable<Troncal> troncalList
+}
+
+json tmpl.troncal(troncalList ?: [])
+
