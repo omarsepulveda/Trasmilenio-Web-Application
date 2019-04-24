@@ -27,7 +27,7 @@
                 </tr>
                 </thead>
 
-                <tbody *ngFor="let v of vehiculos | angularPaginator: { currentPage: currentPage}">
+                <tbody *ngFor="let v of vehiculos | angularPaginator: {itemsPerPage: 10, currentPage: currentPage}">
                 <tr mdbTableCol>
                     <th scope="row">{{v.id}}</th>
                     <td>{{v.matricula}}</td>

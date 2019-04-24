@@ -27,7 +27,7 @@
         </tr>
         </thead>
 
-        <tbody *ngFor="let e of estaciones | angularPaginator: { currentPage: currentPage}">
+        <tbody *ngFor="let e of estaciones | angularPaginator: {itemsPerPage: 10, currentPage: currentPage}">
         <tr mdbTableCol>
           <th scope="row">{{e.id}}</th>
           <td>{{e.nombre_estacion}}</td>

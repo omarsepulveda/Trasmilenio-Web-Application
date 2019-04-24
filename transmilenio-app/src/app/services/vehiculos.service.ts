@@ -20,7 +20,8 @@ export class VehiculosService {
         );
 
         this.httpHeadersPOST = new HttpHeaders({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'text/plain'
             }
         );
     }

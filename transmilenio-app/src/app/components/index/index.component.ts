@@ -46,7 +46,8 @@ export class IndexComponent implements OnInit {
             Swal.fire({
                 title: 'Cargando datos', html: 'Espere un momento por favor', onBeforeOpen: () => {
                     Swal.showLoading();
-                    timerInterval = setInterval(() => {}, 100);
+                    timerInterval = setInterval(() => {
+                    }, 100);
                 },
                 onClose: () => {
                     clearInterval(timerInterval);
@@ -73,11 +74,35 @@ export class IndexComponent implements OnInit {
                     title: 'Oops...',
                     text: JSON.stringify(result),
                 });
+                console.log(JSON.stringify(result));
+                let aux = 'true';
                 for (let v of result) {
-                    this.vehiculosService.post(v).subscribe();
+                    if (v.codigo_interno !== '') {
+                        const auxVehiculo = new Vehiculo();
+                        auxVehiculo.codigo_interno = v.codigo_interno;
+                        auxVehiculo.matricula = v.matricula;
+                        auxVehiculo.tipo = v.tipo;
+                        this.vehiculosService.post(auxVehiculo).subscribe((data: Vehiculo) => {
+                            console.log(data);
+                        }, error => {
+                            console.log(error.message);
+                            aux = error.message;
+                            Swal.close();
+                            Swal.fire(
+                                'Ups!',
+                                'Algo salio mal! ' + aux,
+                                'warning'
+                            );
+                            return;
+                        });
+                    }
                 }
                 Swal.close();
-                this.router.navigate(['vehiculos']);
+                Swal.fire(
+                    'Bien',
+                    'Datos insertados exitosamente',
+                    'success'
+                );
             };
             reader.readAsText(file);
         }
@@ -196,7 +221,6 @@ export class IndexComponent implements OnInit {
                 title: 'usuario y/o contraseña incorrectos'
             });
         }
-        // console.log(JSON.stringify(this.usuario));
     }
 
     ngOnInit() {

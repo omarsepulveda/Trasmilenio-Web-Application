@@ -27,7 +27,7 @@
                 </tr>
                 </thead>
 
-                <tbody *ngFor="let p of portales | angularPaginator: { currentPage: currentPage}">
+                <tbody *ngFor="let p of portales | angularPaginator: {itemsPerPage: 10, currentPage: currentPage}">
                 <tr mdbTableCol>
                     <th scope="row">{{p.id}}</th>
                     <td>{{p.nombre_portal}}</td>
